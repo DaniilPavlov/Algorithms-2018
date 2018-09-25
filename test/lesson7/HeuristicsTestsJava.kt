@@ -1,7 +1,7 @@
 package lesson7
 
-import kotlin.test.Test
 import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 class HeuristicsTestsJava : AbstractHeuristicsTests() {
     @Test
