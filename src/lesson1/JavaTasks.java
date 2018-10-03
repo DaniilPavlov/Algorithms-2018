@@ -99,7 +99,8 @@ public class JavaTasks {
      * 99.5
      * 121.3
      */
-    static public void sortTemperatures(String inputName, String outputName) throws IOException, IllegalFormatException {
+    static public void sortTemperatures(String inputName, String outputName) throws IOException,
+            IllegalFormatException {
         ArrayList<Integer> listOfTemperature = new ArrayList<>();
         String currentLine;
         int currentTemperature;
@@ -148,7 +149,8 @@ public class JavaTasks {
      * 2
      * 2
      */
-    static public void sortSequence(String inputName, String outputName) throws IOException, IllegalFormatException {
+    static public void sortSequence(String inputName, String outputName) throws IOException,
+            IllegalFormatException {
         ArrayList<Integer> sequenceList = new ArrayList<>();
         HashMap<Integer, Integer> map = new HashMap<>();
         int oftTimes = 1, elem, oftTimesElem = Integer.MAX_VALUE, valueOfFoundKey;
