@@ -36,12 +36,10 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         Node<T> newNode = new Node<>(t);
         if (closest == null) {
             root = newNode;
-        }
-        else if (comparison < 0) {
+        } else if (comparison < 0) {
             assert closest.left == null;
             closest.left = newNode;
-        }
-        else {
+        } else {
             assert closest.right == null;
             closest.right = newNode;
         }
@@ -87,12 +85,10 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         int comparison = value.compareTo(start.value);
         if (comparison == 0) {
             return start;
-        }
-        else if (comparison < 0) {
+        } else if (comparison < 0) {
             if (start.left == null) return start;
             return find(start.left, value);
-        }
-        else {
+        } else {
             if (start.right == null) return start;
             return find(start.right, value);
         }
@@ -102,7 +98,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
 
         private Node<T> current = null;
 
-        private BinaryTreeIterator() {}
+        private BinaryTreeIterator() {
+        }
 
         /**
          * Поиск следующего элемента
@@ -172,8 +169,26 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @NotNull
     @Override
     public SortedSet<T> headSet(T toElement) {
-        // TODO
-        throw new NotImplementedError();
+        SortedSet<T> set = new TreeSet<>();
+        headSetAlgorithm(toElement, set, root);
+        return set;
+    }
+
+    public void headSetAlgorithm(T toElement, SortedSet<T> set, Node<T> currentNode) {
+        int compareOfBranches = currentNode.value.compareTo(toElement);
+        switch (compareOfBranches) {
+            case -1:
+                set.add(currentNode.value);
+                if (currentNode.left != null) additionOfBranchToSet(set, currentNode.left);
+                if (currentNode.right != null) headSetAlgorithm(toElement, set, currentNode.right);
+                break;
+            case 0:
+                if (currentNode.left != null) additionOfBranchToSet(set, currentNode.left);
+                break;
+            case 1:
+                if (currentNode.left != null) headSetAlgorithm(toElement, set, currentNode.left);
+                break;
+        }
     }
 
     /**
@@ -183,9 +198,32 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @NotNull
     @Override
     public SortedSet<T> tailSet(T fromElement) {
-        // TODO
-        throw new NotImplementedError();
+        SortedSet<T> set = new TreeSet<>();
+        tailSetAlgorithm(fromElement, set, root);
+        return set;
     }
+
+    public void additionOfBranchToSet(SortedSet<T> set, Node<T> currentNode) {
+        set.add(currentNode.value);
+        if (currentNode.left != null) additionOfBranchToSet(set, currentNode.left);
+        if (currentNode.right != null) additionOfBranchToSet(set, currentNode.right);
+    }
+
+    public void tailSetAlgorithm(T toElement, SortedSet<T> set, Node<T> currentNode) {
+        int compareOfBranches = currentNode.value.compareTo(toElement);
+        switch (compareOfBranches) {
+            case -1:
+                if (currentNode.right != null) tailSetAlgorithm(toElement, set, currentNode.right);
+                break;
+            case 0:
+            case 1:
+                set.add(currentNode.value);
+                if (currentNode.left != null) tailSetAlgorithm(toElement, set, currentNode.left);
+                if (currentNode.right != null) additionOfBranchToSet(set, currentNode.right);
+                break;
+        }
+    }
+
 
     @Override
     public T first() {

@@ -12,10 +12,10 @@ public class Sorts {
             T current = elements[i];
             int j = i - 1;
             for (; j >= 0; j--) {
-                if (elements[j].compareTo(current) > 0) elements[j+1] = elements[j];
+                if (elements[j].compareTo(current) > 0) elements[j + 1] = elements[j];
                 else break;
             }
-            elements[j+1] = current;
+            elements[j + 1] = current;
         }
     }
 
@@ -24,10 +24,10 @@ public class Sorts {
             int current = elements[i];
             int j = i - 1;
             for (; j >= 0; j--) {
-                if (elements[j] > current) elements[j+1] = elements[j];
+                if (elements[j] > current) elements[j + 1] = elements[j];
                 else break;
             }
-            elements[j+1] = current;
+            elements[j + 1] = current;
         }
     }
 
@@ -38,8 +38,7 @@ public class Sorts {
         for (int i = begin; i < end; i++) {
             if (li < left.length && (ri == right.length || left[li] <= right[ri])) {
                 elements[i] = left[li++];
-            }
-            else {
+            } else {
                 elements[i] = right[ri++];
             }
         }
@@ -91,7 +90,7 @@ public class Sorts {
         }
     }
 
-    private static final Random random = new Random(Calendar.getInstance().getTimeInMillis());
+    static final Random random = new Random(Calendar.getInstance().getTimeInMillis());
 
     private static int partition(int[] elements, int min, int max) {
         int x = elements[min + random.nextInt(max - min + 1)];
@@ -128,7 +127,7 @@ public class Sorts {
 
     public static int[] countingSort(int[] elements, int limit) {
         int[] count = new int[limit + 1];
-        for (int element: elements) {
+        for (int element : elements) {
             count[element]++;
         }
         for (int j = 1; j <= limit; j++) {

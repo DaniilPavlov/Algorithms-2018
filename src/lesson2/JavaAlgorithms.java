@@ -178,22 +178,9 @@ public class JavaAlgorithms {
         width = stackOfLetters.get(0).split(" ").length;
         char[][] data = new char[height + 2][width + 2];
         boolean[][] wasIHere = new boolean[height + 2][width + 2];
-        for (int i = 0; i < height + 2; i++) {
-            data[i][0] = '0';
-            data[i][width + 1] = '0';
-        }
-        for (int j = 0; j < width + 2; j++) {
-            data[0][j] = '0';
-            data[height + 1][j] = '0';
-        }
-        for (int i = 1; i <= height; i++) {
-            for (int j = 1; j <= width; j++) {
-                data[i][j] = stackOfLetters.get(i - 1).charAt(2 * (j - 1));
-            }
-        }
+        dataInput(stackOfLetters, data, height, width);
         Set<String> answer = new HashSet<>();
-        for (String word :
-                words) {
+        for (String word : words) {
             for (int i = 0; i < height + 2; i++)
                 for (int j = 0; j < width + 2; j++)
                     wasIHere[i][j] = false;
@@ -212,6 +199,22 @@ public class JavaAlgorithms {
             }
         }
         return answer;
+    }
+
+    private static void dataInput(ArrayList<String> stackOfLetters, char[][] data, int height, int width) {
+        for (int i = 0; i < height + 2; i++) {
+            data[i][0] = '0';
+            data[i][width + 1] = '0';
+        }
+        for (int j = 0; j < width + 2; j++) {
+            data[0][j] = '0';
+            data[height + 1][j] = '0';
+        }
+        for (int i = 1; i <= height; i++) {
+            for (int j = 1; j <= width; j++) {
+                data[i][j] = stackOfLetters.get(i - 1).charAt(2 * (j - 1));
+            }
+        }
     }
 
     private static boolean search(String word, int pos, int ii, int jj, final char[][] data, boolean[][] wasIHere) {

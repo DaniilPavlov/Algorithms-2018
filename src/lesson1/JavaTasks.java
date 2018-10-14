@@ -1,11 +1,11 @@
 package lesson1;
 
+import kotlin.NotImplementedError;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IllegalFormatException;
-
-import static lesson1.Sorts.heapSort;
 
 @SuppressWarnings("unused")
 public class JavaTasks {
@@ -38,6 +38,7 @@ public class JavaTasks {
      * В случае обнаружения неверного формата файла бросить любое исключение.
      */
     static public void sortTimes(String inputName, String outputName) {
+        throw new NotImplementedError();
     }
 
     /**
@@ -67,6 +68,7 @@ public class JavaTasks {
      * В случае обнаружения неверного формата файла бросить любое исключение.
      */
     static public void sortAddresses(String inputName, String outputName) {
+        throw new NotImplementedError();
     }
 
     /**
@@ -110,11 +112,10 @@ public class JavaTasks {
                 listOfTemperature.add(currentTemperature);
             }
         }
-        int[] sortedTemperatureArray = listOfTemperature.stream().mapToInt(i -> i).toArray();
-        heapSort(sortedTemperatureArray);
+        listOfTemperature.sort(Integer::compare);
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputName));
-        for (int i = 0; i < sortedTemperatureArray.length; i++) {
-            writer.write(String.valueOf((double) sortedTemperatureArray[i] / 10));
+        for (int i = 0; i < listOfTemperature.size(); i++) {
+            writer.write(String.valueOf((double) listOfTemperature.get(i) / 10));
             writer.newLine();
         }
         writer.close();
@@ -205,5 +206,6 @@ public class JavaTasks {
      * Результат: second = [1 3 4 9 9 13 15 20 23 28]
      */
     static <T extends Comparable<T>> void mergeArrays(T[] first, T[] second) {
+        throw new NotImplementedError();
     }
 }
