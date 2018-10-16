@@ -101,6 +101,9 @@ public class JavaTasks {
      * 99.5
      * 121.3
      */
+
+    // Трудоемкость O(n^2)
+    // Ресурсоемкость O(n)
     static public void sortTemperatures(String inputName, String outputName) throws IOException,
             IllegalFormatException {
         ArrayList<Integer> listOfTemperature = new ArrayList<>();
@@ -150,6 +153,9 @@ public class JavaTasks {
      * 2
      * 2
      */
+
+    // Трудоемкость O(n^2)
+    // Ресурсоемкость O(n)
     static public void sortSequence(String inputName, String outputName) throws IOException,
             IllegalFormatException {
         ArrayList<Integer> sequenceList = new ArrayList<>();

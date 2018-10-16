@@ -166,6 +166,9 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Найти множество всех элементов меньше заданного
      * Сложная
      */
+
+    // Трудоемкость O(n * m)
+    // Ресурсоемкость O(n)
     @NotNull
     @Override
     public SortedSet<T> headSet(T toElement) {
@@ -195,6 +198,9 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Найти множество всех элементов больше или равных заданного
      * Сложная
      */
+
+    // Трудоемкость O(n * m)
+    // Ресурсоемкость O(n)
     @NotNull
     @Override
     public SortedSet<T> tailSet(T fromElement) {
