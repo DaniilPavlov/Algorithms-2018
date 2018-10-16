@@ -102,8 +102,9 @@ public class JavaTasks {
      * 121.3
      */
 
-    // Трудоемкость O(n^2)
-    // Ресурсоемкость O(n)
+    // Трудоекость: T = O(n)
+    // Трудоемкость: T = O(n^2)
+    // Ресурсоемкость: R = O(n)
     static public void sortTemperatures(String inputName, String outputName) throws IOException,
             IllegalFormatException {
         ArrayList<Integer> listOfTemperature = new ArrayList<>();
@@ -112,7 +113,9 @@ public class JavaTasks {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
             while ((currentLine = bufferedReader.readLine()) != null) {
                 currentTemperature = (int) (Double.valueOf(currentLine) * 10);
-                listOfTemperature.add(currentTemperature);
+                if (currentTemperature >= -2730 && currentTemperature <= 5000) {
+                    listOfTemperature.add(currentTemperature);
+                } else throw new IllegalArgumentException();
             }
         }
         listOfTemperature.sort(Integer::compare);
@@ -154,8 +157,9 @@ public class JavaTasks {
      * 2
      */
 
-    // Трудоемкость O(n^2)
-    // Ресурсоемкость O(n)
+    //Трудоемкость: T = O(n)
+    // Трудоемкость: T = O(n^2)
+    // Ресурсоемкость: R = O(n)
     static public void sortSequence(String inputName, String outputName) throws IOException,
             IllegalFormatException {
         ArrayList<Integer> sequenceList = new ArrayList<>();

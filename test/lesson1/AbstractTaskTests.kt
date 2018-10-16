@@ -1,7 +1,9 @@
 package lesson1
 
+import junit.framework.Assert.fail
 import java.io.BufferedWriter
 import java.io.File
+import java.io.IOException
 import java.util.*
 import kotlin.math.abs
 
@@ -98,6 +100,16 @@ abstract class AbstractTaskTests : AbstractFileTests() {
         } finally {
             File("temp.txt").delete()
         }
+        try {
+            sortTemperatures("input/temp_in2.txt", "temp.txt")
+            fail("Illegal temperature.")
+        } catch (e: IllegalArgumentException) {
+        }
+        try {
+            sortTemperatures("input/temp_in3.txt", "temp.txt")
+            fail("IOException is expected.")
+        } catch (e: IOException) {
+        }
 
         fun testGeneratedTemperatures(size: Int) {
             try {
@@ -149,6 +161,16 @@ abstract class AbstractTaskTests : AbstractFileTests() {
                     """.trimIndent())
         } finally {
             File("temp.txt").delete()
+        }
+        try {
+            sortSequence("input/seq_in3.txt", "temp.txt")
+            fail("IllegalArgumentException is expected.")
+        } catch (e: IllegalArgumentException) {
+        }
+        try {
+            sortSequence("input/seq_in4.txt", "temp.txt")
+            fail("IOException is expected.")
+        } catch (e: IOException) {
         }
 
         fun BufferedWriter.writeNumbers(numbers: List<Int>) {
