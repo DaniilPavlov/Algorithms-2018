@@ -102,8 +102,7 @@ public class JavaTasks {
      * 121.3
      */
 
-    // Трудоекость: T = O(n)
-    // Трудоемкость: T = O(n^2)
+    // Трудоемкость: T = O(n * (log(n))
     // Ресурсоемкость: R = O(n)
     static public void sortTemperatures(String inputName, String outputName) throws IOException,
             IllegalFormatException {
@@ -157,8 +156,7 @@ public class JavaTasks {
      * 2
      */
 
-    //Трудоемкость: T = O(n)
-    // Трудоемкость: T = O(n^2)
+    // Трудоемкость: T = O(n)
     // Ресурсоемкость: R = O(n)
     static public void sortSequence(String inputName, String outputName) throws IOException,
             IllegalFormatException {

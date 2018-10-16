@@ -675,8 +675,8 @@ abstract class AbstractAlgorithmsTests {
     fun baldaSearcher(baldaSearcher: (String, Set<String>) -> Set<String>) {
         assertEquals(setOf("ТРАВА", "КРАН", "АКВА", "НАРТЫ"),
                 baldaSearcher("input/balda_in1.txt", setOf("ТРАВА", "КРАН", "АКВА", "НАРТЫ", "РАК")))
-        assertEquals(setOf("РУКА", "ЛУНТИК", "КРИК"),
+        assertEquals(setOf("РУКА", "ЛУНТИК", "КРИК", "ПЕРСИК"),
                 baldaSearcher("input/balda_in2.txt", setOf("УХОД", "ПОХОД", "МАШИНА", "МЕЛ", "РУКА", "ТАЗ",
-                        "КОСМОС", "РИСК", "КРИК", "ЛУНТИК")))
+                        "КОСМОС", "РИСК", "КРИК", "ЛУНТИК", "ПЕРСИК")))
     }
 }

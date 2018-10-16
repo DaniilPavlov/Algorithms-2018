@@ -102,8 +102,8 @@ public class JavaAlgorithms {
      * вернуть ту из них, которая встречается раньше в строке first.
      */
 
-    // Трудоемкость O(m * n)
-    // Ресурсоемкость O(n)
+    // Трудоемкость: T = O(m * n)
+    // Ресурсоемкость: R = O(n)
     static public String longestCommonSubstring(final String first, final String second) throws NotImplementedError {
         int maxLength = 0;
         int iMax = 0;
@@ -168,8 +168,8 @@ public class JavaAlgorithms {
      * Остальные символы ни в файле, ни в словах не допускаются.
      */
 
-    // Трудоемкость O(n * m)
-    // Ресурсоемкость O(n)
+    // Трудоемкость: T = O(n * m)
+    // Ресурсоемкость: R = O(n)
     static public Set<String> baldaSearcher(String inputName, Set<String> words) throws NotImplementedError,
             IOException {
         ArrayList<String> stackOfLetters = new ArrayList<>();
