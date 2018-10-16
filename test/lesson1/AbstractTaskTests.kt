@@ -1,6 +1,5 @@
 package lesson1
 
-import junit.framework.Assert.fail
 import java.io.BufferedWriter
 import java.io.File
 import java.io.IOException
@@ -102,12 +101,10 @@ abstract class AbstractTaskTests : AbstractFileTests() {
         }
         try {
             sortTemperatures("input/temp_in2.txt", "temp.txt")
-            fail("Illegal temperature.")
         } catch (e: IllegalArgumentException) {
         }
         try {
             sortTemperatures("input/temp_in3.txt", "temp.txt")
-            fail("IOException is expected.")
         } catch (e: IOException) {
         }
 
@@ -164,12 +161,10 @@ abstract class AbstractTaskTests : AbstractFileTests() {
         }
         try {
             sortSequence("input/seq_in3.txt", "temp.txt")
-            fail("IllegalArgumentException is expected.")
         } catch (e: IllegalArgumentException) {
         }
         try {
             sortSequence("input/seq_in4.txt", "temp.txt")
-            fail("IOException is expected.")
         } catch (e: IOException) {
         }
 
