@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("unused")
@@ -172,7 +173,7 @@ public class JavaAlgorithms {
     // Ресурсоемкость: R = O(n)
     static public Set<String> baldaSearcher(String inputName, Set<String> words) throws NotImplementedError,
             IOException {
-        ArrayList<String> stackOfLetters = new ArrayList<>();
+        List<String> stackOfLetters = new ArrayList<>();
         String currentLine;
         int height = 0, width;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
@@ -182,9 +183,8 @@ public class JavaAlgorithms {
             }
         }
         width = stackOfLetters.get(0).split(" ").length;
-        char[][] data = new char[height + 2][width + 2];
         boolean[][] wasIHere = new boolean[height + 2][width + 2];
-        dataInput(stackOfLetters, data, height, width);
+        char[][] data = dataInput(stackOfLetters, height + 2, width + 2);
         Set<String> answer = new HashSet<>();
         for (String word : words) {
             for (int i = 0; i < height + 2; i++)
@@ -207,20 +207,22 @@ public class JavaAlgorithms {
         return answer;
     }
 
-    private static void dataInput(ArrayList<String> stackOfLetters, char[][] data, int height, int width) {
-        for (int i = 0; i < height + 2; i++) {
+    private static char[][] dataInput(List<String> stackOfLetters, int height, int width) {
+        char[][] data = new char[height][width];
+        for (int i = 0; i < height; i++) {
             data[i][0] = '0';
-            data[i][width + 1] = '0';
+            data[i][width - 1] = '0';
         }
-        for (int j = 0; j < width + 2; j++) {
+        for (int j = 0; j < width; j++) {
             data[0][j] = '0';
-            data[height + 1][j] = '0';
+            data[height - 1][j] = '0';
         }
-        for (int i = 1; i <= height; i++) {
-            for (int j = 1; j <= width; j++) {
+        for (int i = 1; i <= height - 2; i++) {
+            for (int j = 1; j <= width - 2; j++) {
                 data[i][j] = stackOfLetters.get(i - 1).charAt(2 * (j - 1));
             }
         }
+        return data;
     }
 
     private static boolean search(String word, int pos, int ii, int jj, final char[][] data, boolean[][] wasIHere) {

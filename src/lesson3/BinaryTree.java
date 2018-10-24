@@ -167,7 +167,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Сложная
      */
 
-    // Трудоемкость: T = O(log(n))
+    // Трудоемкость: T = O(n)
     // Ресурсоемкость: R = O(n)
     @NotNull
     @Override
@@ -199,7 +199,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Сложная
      */
 
-    // Трудоемкость: T = O(log(n))
+    // Трудоемкость: T = O(n)
     // Ресурсоемкость: R = O(n)
     @NotNull
     @Override

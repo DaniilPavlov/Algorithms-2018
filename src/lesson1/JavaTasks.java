@@ -102,26 +102,29 @@ public class JavaTasks {
      * 121.3
      */
 
-    // Трудоемкость: T = O(n * (log(n))
+    // Трудоемкость: T = O(n)
     // Ресурсоемкость: R = O(n)
     static public void sortTemperatures(String inputName, String outputName) throws IOException,
             IllegalFormatException {
-        ArrayList<Integer> listOfTemperature = new ArrayList<>();
+        int[] data = new int[7732];
         String currentLine;
         int currentTemperature;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
             while ((currentLine = bufferedReader.readLine()) != null) {
                 currentTemperature = (int) (Double.valueOf(currentLine) * 10);
                 if (currentTemperature >= -2730 && currentTemperature <= 5000) {
-                    listOfTemperature.add(currentTemperature);
+                    data[currentTemperature + 2730]++;
                 } else throw new IllegalArgumentException();
             }
         }
-        listOfTemperature.sort(Integer::compare);
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputName));
-        for (int i = 0; i < listOfTemperature.size(); i++) {
-            writer.write(String.valueOf((double) listOfTemperature.get(i) / 10));
-            writer.newLine();
+        for (int i = 0; i < 7732; i++) {
+            if (data[i] != 0) {
+                for (int j = 0; j < data[i]; j++) {
+                    writer.write(String.valueOf((double) (i - 2730) / 10));
+                    writer.newLine();
+                }
+            }
         }
         writer.close();
     }
