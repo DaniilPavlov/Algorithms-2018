@@ -64,8 +64,73 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      */
     @Override
     public boolean remove(Object o) {
-        // TODO
-        throw new NotImplementedError();
+        if (root == null) {
+            return false;
+        }
+        Node<T> parent = root;
+        Node<T> curr = root;
+        int cmp;
+        int currIsLeft = 0;
+        while ((cmp = curr.value.compareTo((T) o)) != 0) {
+            parent = curr;
+            if (cmp > 0) {
+                currIsLeft = 1;
+                curr = curr.left;
+            } else {
+                currIsLeft = -1;
+                curr = curr.right;
+            }
+            if (curr == null) {
+                return false;
+            }
+        }
+        if (curr.left != null && curr.right != null) {
+            Node<T> next = curr.right;
+            Node<T> pNext = curr;
+            while (next.left != null) {
+                pNext = next;
+                next = next.left;
+            }
+            if (root == curr) {
+                root = next;
+            }
+            if (pNext == curr) {
+                curr.right = next.right;
+            } else {
+                pNext.left = next.right;
+            }
+            next.left = curr.left;
+            next.right = curr.right;
+            switch (currIsLeft) {
+                case 1:
+                    parent.left = next;
+                    break;
+                case -1:
+                    parent.right = next;
+                    break;
+            }
+        } else {
+            if (curr.left != null) {
+                reLink(parent, curr, curr.left);
+            } else if (curr.right != null) {
+                reLink(parent, curr, curr.right);
+            } else {
+                reLink(parent, curr, null);
+            }
+        }
+        size--;
+        return true;
+    }
+
+    private void reLink(Node<T> parent, Node<T> curr, Node<T> child) {
+        if (parent == curr) {
+            root = child;
+        } else if (parent.left == curr) {
+            parent.left = child;
+        } else {
+            parent.right = child;
+        }
+        curr = new Node<>(null);
     }
 
     @Override
@@ -98,7 +163,18 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
 
         private Node<T> current = null;
 
+        private Stack<Node<T>> stack;
+
         private BinaryTreeIterator() {
+            stack = new Stack<>();
+            addToStack(root);
+        }
+
+        private void addToStack(Node<T> node) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
         }
 
         /**
@@ -106,19 +182,20 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
          * Средняя
          */
         private Node<T> findNext() {
-            // TODO
-            throw new NotImplementedError();
+            return stack.pop();
         }
 
         @Override
         public boolean hasNext() {
-            return findNext() != null;
+            return !stack.isEmpty();
         }
 
         @Override
         public T next() {
             current = findNext();
-            if (current == null) throw new NoSuchElementException();
+            if (current.right != null) {
+                addToStack(current.right);
+            }
             return current.value;
         }
 
@@ -128,8 +205,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
          */
         @Override
         public void remove() {
-            // TODO
-            throw new NotImplementedError();
+            BinaryTree.this.remove(current.value);
         }
     }
 
