@@ -51,8 +51,7 @@ public class JavaDynamicTasks {
         }
         int[] lis = new int[list.size()];
         Arrays.fill(lis, 1);
-        int lisIndex = 0;
-        int count = 0;
+        int lisIndex = 0, count = 0;
         for (int i = 1; i < list.size(); i++) {
             for (int j = 0; j < i; j++) {
                 if (list.get(i) > list.get(j) && lis[i] < lis[j] + 1) {
@@ -65,13 +64,13 @@ public class JavaDynamicTasks {
             }
         }
         List<Integer> result = new ArrayList<>();
-        int i = lisIndex;
-        int possibleI;
+        int i = lisIndex, possibleI;
         result.add(list.get(i));
+        i--;
         while (i >= 0 && count >= 0) {
             possibleI = -1;
             if (lis[i] == count - 1 && list.get(i) < list.get(lisIndex)) {
-                for (int j = i - 1; j >= 0; j--) {
+                for (int j = i - 1; j >= count - 2; j--) {
                     if (lis[j] == count - 1 && list.get(j) < list.get(lisIndex)) {
                         possibleI = j;
                     }
@@ -80,8 +79,8 @@ public class JavaDynamicTasks {
                     i = possibleI;
                 }
                 result.add(list.get(i));
-                count--;
                 lisIndex = i;
+                count--;
             }
             i--;
         }
@@ -140,8 +139,8 @@ public class JavaDynamicTasks {
         }
         for (i = 1; i < height; i++) {
             for (j = 1; j < width; j++) {
-                matrixOfMinSums[i][j] = min(min(matrixOfMinSums[i - 1][j], matrixOfMinSums[i - 1][j - 1]),
-                        matrixOfMinSums[i][j - 1]) + inputMatrix[i][j];
+                matrixOfMinSums[i][j] = min(matrixOfMinSums[i - 1][j - 1],
+                        min(matrixOfMinSums[i - 1][j], matrixOfMinSums[i][j - 1])) + inputMatrix[i][j];
             }
         }
         return matrixOfMinSums[height - 1][width - 1];
